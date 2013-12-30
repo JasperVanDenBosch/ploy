@@ -1,0 +1,4 @@
+
+
+class DockerContainerManager(object):
+    pass
