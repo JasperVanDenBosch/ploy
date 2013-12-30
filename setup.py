@@ -5,4 +5,5 @@ setup(
     version='0.0',
     packages=find_packages(),
     test_suite="tests",
+    tests_require=['mock'],
     )
