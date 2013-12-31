@@ -11,11 +11,15 @@ class DockerContainerManager(object):
         return self
 
     def __exit__(self, *_):
-        for container in self.containersToPrintOutputFor:
-            self.client.logs(container)
-        for container in self.containers:
-            self.client.kill(container)
-            self.client.remove_container(container)
+        try:
+            for container in self.containersToPrintOutputFor:
+                print(self.client.logs(container))
+        except:
+            raise
+        finally:
+            for container in self.containers:
+                self.client.kill(container)
+                self.client.remove_container(container)
 
     def add(self, container, printOutput=False):
         self.containers.append(container)

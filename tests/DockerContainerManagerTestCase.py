@@ -38,3 +38,4 @@ class DockerContainerManagerTestCase(TestCase):
         # the container is killed and removed
         client.logs.assert_any_call('my_container')
 
+
