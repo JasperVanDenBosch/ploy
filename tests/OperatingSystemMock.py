@@ -1,0 +1,4 @@
+
+
+class OperatingSystemMock(object):
+    pass

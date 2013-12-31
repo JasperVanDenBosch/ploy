@@ -8,14 +8,16 @@ class BuildFactoryTestCase(TestCase):
 
     def test_New_build_has_git_commit_hash_of_head(self):
         from ploy.BuildFactory import BuildFactory
-        os = osMock()
+        os = Mock()
+        os.run.return_value = '\tabcdef\n'
         factory = BuildFactory(os)
         build = factory.new()
-        self.assertEqual(build.gitCommitHash, os.run('git show-ref --heads -s'))
+        os.run.assert_called_with('git show-ref --heads -s')
+        self.assertEqual(build.commit, 'abcdef')
 
     def test_New_build_has_a_unique_name(self):
         from ploy.BuildFactory import BuildFactory
-        os = osMock()
+        os = Mock()
         factory = BuildFactory(os)
         build1 = factory.new()
         build2 = factory.new()
@@ -23,7 +25,7 @@ class BuildFactoryTestCase(TestCase):
 
     def test_New_build_knows_when_it_was_created(self):
         from ploy.BuildFactory import BuildFactory
-        os = osMock()
+        os = Mock()
         before = datetime.datetime.now()
         factory = BuildFactory(os)
         build = factory.new()
@@ -42,12 +44,6 @@ class BuildFactoryTestCase(TestCase):
             #print(name)
         self.assertEqual(100, len(names))
 
-def osMock():
-    os = Mock()
-    def mirror(cmd):
-        return cmd
-    os.run.side_effect = mirror
-    return os
 
 
 
