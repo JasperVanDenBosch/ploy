@@ -12,6 +12,7 @@ def main(global_config, **settings):
     config.include('pyramid_mako')
     config.add_static_view('static', 'static', cache_max_age=10)
     config.add_route('home', '/')
+    config.add_route('github', '/github')
     config.scan()
     return config.make_wsgi_app()
 

@@ -5,3 +5,8 @@ from pyramid.httpexceptions import HTTPNotFound
 @view_config(route_name='home', renderer='templates/home.mako')
 def home(request):
     return {}
+
+@view_config(route_name='github')
+def github(request):
+    request.response.body = 'Received by Ploy.'
+    return request.response
