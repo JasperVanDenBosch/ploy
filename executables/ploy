@@ -1,0 +1,25 @@
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+import argparse
+import ploy
+
+parser = argparse.ArgumentParser()
+subparsers = parser.add_subparsers(dest="command",
+    title='subcommands')
+
+version = subparsers.add_parser('version',
+    help='Show ploy software version.')
+
+serve = subparsers.add_parser('serve',
+    help='Start the ploy web interface.')
+
+args = parser.parse_args()
+
+if args.command == 'version':
+    import pkg_resources
+    print(pkg_resources.get_distribution("ploy").version)
+elif args.command == 'serve':
+    import ploy.webapp
+    ploy.webapp.serve()
+
+
