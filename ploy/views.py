@@ -1,12 +1,12 @@
 from pyramid.view import view_config
-from pyramid.httpexceptions import HTTPNotFound
+from ploy.root import Root
 
 
-@view_config(route_name='home', renderer='templates/home.mako')
-def home(request):
+@view_config(context=Root, renderer='templates/root.mako')
+def get_root(request):
     return {}
 
-@view_config(route_name='github')
-def github(request):
-    request.response.body = 'Received by Ploy.'
-    return request.response
+# @view_config(context=GithubEvents)
+# def github(request):
+#     request.response.body = 'Received by Ploy.'
+#     return request.response

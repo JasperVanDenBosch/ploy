@@ -8,6 +8,10 @@ reqs = [
 'mako',
 'pyramid',
 'pyramid_mako',
+'pyramid_tm',
+'pyramid_zodbconn',
+'transaction',
+'ZODB3',
 'waitress',
 ]
 
@@ -23,7 +27,12 @@ setup(name='ploy',
       zip_safe=False,
       license='BSD',
       long_description='...',
-      classifiers=[],
+      classifiers=[
+          "Programming Language :: Python",
+          "Framework :: Pyramid",
+          "Topic :: Internet :: WWW/HTTP",
+          "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
+      ],
       install_requires=reqs,
       include_package_data=True,
       entry_points="""\
