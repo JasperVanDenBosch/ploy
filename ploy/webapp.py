@@ -1,6 +1,7 @@
+from ploy.dependencies import Dependencies
 from pyramid.config import Configurator
 import pyramid_zodbconn
-import waitress, os, persistent.list
+import waitress, os
 from ploy.root import Root
 
 
@@ -9,11 +10,6 @@ def root_factory(request):
     database = conn.root()
     if 'root' not in database:
         root = Root()
-        githubEvents = persistent.list.PersistentList()
-        githubEvents.__parent__ = root
-        githubEvents.__name__ = 'github-events'
-        root['github-events'] = githubEvents
-
         database['root'] = root
         import transaction
         transaction.commit()
@@ -28,11 +24,13 @@ def main(global_config, **settings):
     """
     settings['tm.attempts'] = 3
     settings['zodbconn.uri'] = 'file://Data.fs'
+    settings['pyramid.reload_templates'] = True
     config = Configurator(root_factory=root_factory, settings=settings)
     config.include('pyramid_mako')
     config.include('pyramid_tm')
     config.include('pyramid_zodbconn')
     config.include('pyramid_debugtoolbar')
     config.add_static_view('static', 'static', cache_max_age=10)
+    config.add_request_method(lambda x: Dependencies(), 'dependencies', reify=True)
     config.scan()
     return config.make_wsgi_app()

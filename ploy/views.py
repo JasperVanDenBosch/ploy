@@ -16,6 +16,8 @@ def get_github_events(request):
              renderer='templates/github_events.mako')
 def post_github_events(request):
     event = request.headers.get('X-GitHub-Event')
-    request.context.append({'event':event, 'payload': request.json_body})
+    ts = request.dependencies.getClock().now()
+    message = {'event':event, 'payload': request.json_body, 'received':ts}
+    request.context.append(message)
     request.response.body = 'Received by Ploy.'
     return request.response
