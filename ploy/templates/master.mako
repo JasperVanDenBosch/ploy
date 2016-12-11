@@ -13,8 +13,10 @@
   </head>
 
   <body>
-        <h1>Ploy</h1>
-        <ul><li><a href="\github-events\">Github events</a></li></ul>
+    <div id="header">
+        <h1><a href="/">Ploy</a></h1>
+        <ul><li><a href="/github-events/">Github events</a></li></ul>
+    </div>
 
         ${self.body()}
 

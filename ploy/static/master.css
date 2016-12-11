@@ -1,0 +1,10 @@
+html {font: 13px normal arial,sans-serif;}
+h1, h2 {font-style: normal; font-weight: normal; margin: 23px;}
+h1 {margin-bottom: 0;}
+div#header li {list-style: none;}
+div#header a {text-decoration: none; margin: 10px;}
+div#header a:hover {text-decoration: underline;}
+ul.messages>li {padding: 4px; list-style: none; border: 1px solid lightgray; border-radius: 4px;}
+dt, dd {display: inline;}
+dt {margin-left: 10px; color: LightGray; font-weight:lighter;}
+dd {margin: 0;}

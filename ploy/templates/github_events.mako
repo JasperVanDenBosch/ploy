@@ -3,7 +3,7 @@
 
 <h2>Github events</h2>
 
-<ul>
+<ul class="messages">
     % for event in events:
         <li>
             <dl>
