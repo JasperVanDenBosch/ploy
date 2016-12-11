@@ -1,6 +1,21 @@
 ploy
 ====
 
+Continuous integration
+
+* 100% free and open-source
+* Run on your own workstation or server.
+* Based on python packages only. Can be installed in one step.
+
+
+Getting started
+---------------
+
+Start the ploy server:
+```
+ploy serve
+```
+
 
 Use at home with ngrok
 ----------------------
