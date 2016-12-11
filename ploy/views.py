@@ -15,10 +15,7 @@ def get_github_events(request):
 @view_config(context=persistent.list.PersistentList, request_method='POST',
              renderer='templates/github_events.mako')
 def post_github_events(request):
-    request.context.append(request.json_body)
-    return {'events':request.context}
-
-# @view_config(context=GithubEvents)
-# def github(request):
-#     request.response.body = 'Received by Ploy.'
-#     return request.response
+    event = request.headers.get('X-GitHub-Event')
+    request.context.append({'event':event, 'payload': request.json_body})
+    request.response.body = 'Received by Ploy.'
+    return request.response
