@@ -15,7 +15,10 @@
   <body>
     <div id="header">
         <h1><a href="/">Ploy</a></h1>
-        <ul><li><a href="/github-events/">Github events</a></li></ul>
+        <ul>
+            <li><a href="/github-events/">Github events</a></li>
+            <li><a href="/jobs/">Jobs</a></li>
+        </ul>
     </div>
 
         ${self.body()}
