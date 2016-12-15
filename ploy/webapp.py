@@ -3,6 +3,28 @@ from pyramid.config import Configurator
 import pyramid_zodbconn
 import waitress, os
 from ploy.root import Root
+import threading
+import time
+from pyramid.scripting import get_root
+
+def worker(app=None):
+    """thread worker function"""
+    while True:
+        print('Worker alive.')
+        (root, closer) = get_root(app)
+        import transaction
+        updatedJobs = []
+        noJobsHandledYet = True
+        for job in root.jobs:
+            if job.status == 'queued' and noJobsHandledYet:
+                job.status = 'handled'
+                noJobsHandledYet = False
+                print('Handled job.')
+            updatedJobs.append(job)
+        root.jobs._inner = updatedJobs
+        closer()
+        transaction.commit()
+        time.sleep(8)
 
 
 def root_factory(request):
@@ -17,6 +39,9 @@ def root_factory(request):
 
 def serve():
     wsgiapp = main(None)
+    thread = threading.Thread(target=worker, kwargs={'app':wsgiapp})
+    thread.daemon = True
+    thread.start()
     waitress.serve(wsgiapp, host='0.0.0.0', port=6543)
 
 def main(global_config, **settings):
