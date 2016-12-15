@@ -13,15 +13,12 @@ def worker(app=None):
         print('Worker alive.')
         (root, closer) = get_root(app)
         import transaction
-        updatedJobs = []
         noJobsHandledYet = True
         for job in root.jobs:
-            if job.status == 'queued' and noJobsHandledYet:
-                job.status = 'handled'
+            if job.status == 'handled' and noJobsHandledYet:
+                job.status = 'handled2'
                 noJobsHandledYet = False
                 print('Handled job.')
-            updatedJobs.append(job)
-        root.jobs._inner = updatedJobs
         closer()
         transaction.commit()
         time.sleep(8)
