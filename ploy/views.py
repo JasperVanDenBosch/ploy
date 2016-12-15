@@ -26,6 +26,7 @@ def post_github_events(request):
     newJob = Job()
     newJob.status = 'queued'
     newJob.queued = ts
+    newJob.repositoryGitUrl = message['payload']['repository']['git_url']
     request.root.jobs.append(newJob)
     request.response.body = 'Received by Ploy.'
     return request.response

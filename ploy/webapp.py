@@ -6,6 +6,7 @@ from ploy.root import Root
 import threading
 import time
 from pyramid.scripting import get_root
+from ploy.process import processJob
 
 def worker(app=None):
     """thread worker function"""
@@ -15,12 +16,15 @@ def worker(app=None):
         import transaction
         noJobsHandledYet = True
         for job in root.jobs:
-            if job.status == 'handled' and noJobsHandledYet:
-                job.status = 'handled2'
+            if job.status == 'queued' and noJobsHandledYet:
+                job.status = 'cloning..'
+                transaction.get().commit()
                 noJobsHandledYet = False
-                print('Handled job.')
+                print('Handling job.')
+                processJob(job)
+                job.status = 'done.'
         closer()
-        transaction.commit()
+        transaction.get().commit()
         time.sleep(8)
 
 

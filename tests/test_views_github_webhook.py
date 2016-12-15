@@ -20,7 +20,7 @@ class GithubEventsViewTests(unittest.TestCase):
         request.dependencies.getClock.return_value = self.clock
         request.context = []
         request.headers['X-GitHub-Event'] = 'explosion'
-        request.json_body = {'foo':'bar'}
+        request.json_body = {'foo': 'bar', 'repository':{'git_url':'biz'}}
         info = post_github_events(request)
         lastEvent = request.context[-1]
         self.assertIn('event', lastEvent)
@@ -40,9 +40,10 @@ class GithubEventsViewTests(unittest.TestCase):
         request.dependencies = Mock()
         request.dependencies.getClock.return_value = self.clock
         request.context = []
-        request.json_body = {'foo': 'bar'}
+        request.json_body = {'foo': 'bar', 'repository':{'git_url':'baz'}}
         info = post_github_events(request)
         self.assertEqual(1, len(request.root.jobs))
         newjob = request.root.jobs[0]
         self.assertEqual('queued', newjob.status)
         self.assertEqual(self.clock.now(), newjob.queued)
+        self.assertEqual('baz', newjob.repositoryGitUrl)
