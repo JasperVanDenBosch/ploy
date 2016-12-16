@@ -1,4 +1,4 @@
 import git, petname
 
-def processJob(job):
-    git.Repo.clone_from(job.repositoryGitUrl, '/tmp/'+petname.Generate(2, '-'))
+def processBuild(build):
+    git.Repo.clone_from(build.repositoryGitUrl, '/tmp/'+petname.Generate(2, '-'))

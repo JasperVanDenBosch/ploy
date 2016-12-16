@@ -1,6 +1,6 @@
 from persistent import Persistent
 from ploy.githubevents import GithubEvents
-from ploy.jobs import Jobs
+from ploy.builds import Builds
 
 
 class Root(Persistent):
@@ -9,11 +9,11 @@ class Root(Persistent):
 
     def __init__(self):
         self.githubEvents = GithubEvents(self)
-        self.jobs = Jobs(self)
+        self.builds = Builds(self)
 
     def __getitem__(self, key):
         if key == 'github-events':
             return self.githubEvents
-        if key == 'jobs':
-            return self.jobs
+        if key == 'builds':
+            return self.builds
         raise IndexError

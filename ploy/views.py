@@ -1,8 +1,8 @@
 from pyramid.view import view_config
 from ploy.root import Root
 from ploy.githubevents import GithubEvents
-from ploy.jobs import Jobs
-from ploy.job import Job
+from ploy.builds import Builds
+from ploy.build import Build
 
 
 @view_config(context=Root, renderer='templates/root.mako')
@@ -23,16 +23,16 @@ def post_github_events(request):
     ts = request.dependencies.getClock().now()
     message = {'event':event, 'payload': request.json_body, 'received':ts}
     request.context.append(message)
-    newJob = Job()
-    newJob.status = 'queued'
-    newJob.queued = ts
-    newJob.repositoryGitUrl = message['payload']['repository']['git_url']
-    request.root.jobs.append(newJob)
+    newBuild = Build()
+    newBuild.status = 'queued'
+    newBuild.queued = ts
+    newBuild.repositoryGitUrl = message['payload']['repository']['git_url']
+    request.root.builds.append(newBuild)
     request.response.body = 'Received by Ploy.'
     return request.response
 
 
-@view_config(context=Jobs, request_method='GET',
-             renderer='templates/jobs.mako')
-def get_jobs(request):
-    return {'jobs': request.context}
+@view_config(context=Builds, request_method='GET',
+             renderer='templates/builds.mako')
+def get_builds(request):
+    return {'builds': request.context}

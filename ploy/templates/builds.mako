@@ -1,16 +1,16 @@
 <%inherit file="master.mako"/>
 
 
-<h2>Jobs</h2>
+<h2>Builds</h2>
 
 <ul class="messages">
-    % for job in jobs:
+    % for build in builds:
         <li>
             <dl>
             <dt>status</dt>
-                <dd>${job.status}</dd>
+                <dd>${build.status}</dd>
             <dt>queued</dt>
-                <dd class="datetime">${job.queued}</dd>
+                <dd class="datetime">${build.queued}</dd>
             </dl>
         </li>
     % endfor

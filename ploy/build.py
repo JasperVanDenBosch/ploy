@@ -1,5 +1,5 @@
 from persistent import Persistent
 
 
-class Job(Persistent):
+class Build(Persistent):
     pass

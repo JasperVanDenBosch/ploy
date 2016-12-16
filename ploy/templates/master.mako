@@ -17,7 +17,7 @@
         <h1><a href="/">Ploy</a></h1>
         <ul>
             <li><a href="/github-events/">Github events</a></li>
-            <li><a href="/jobs/">Jobs</a></li>
+            <li><a href="/builds/">Builds</a></li>
         </ul>
     </div>
 

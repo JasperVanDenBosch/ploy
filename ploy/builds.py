@@ -1,10 +1,10 @@
 from persistent import Persistent
 
 
-class Jobs(Persistent):
+class Builds(Persistent):
     def __init__(self, parent):
         self.__parent__ = parent
-        self.__name__ = 'jobs'
+        self.__name__ = 'builds'
         self._inner = []
 
     def append(self, newChild):
