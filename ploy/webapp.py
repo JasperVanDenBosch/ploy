@@ -38,7 +38,7 @@ def root_factory(request):
         transaction.commit()
     return database['root']
 
-def serve():
+def start():
     wsgiapp = main(None)
     thread = threading.Thread(target=worker, kwargs={'app':wsgiapp})
     thread.daemon = True

@@ -10,7 +10,7 @@ subparsers = parser.add_subparsers(dest="command",
 version = subparsers.add_parser('version',
     help='Show ploy software version.')
 
-serve = subparsers.add_parser('serve',
+start = subparsers.add_parser('start',
     help='Start the ploy web interface.')
 
 args = parser.parse_args()
@@ -18,8 +18,8 @@ args = parser.parse_args()
 if args.command == 'version':
     import pkg_resources
     print(pkg_resources.get_distribution("ploy").version)
-elif args.command == 'serve':
+elif args.command == 'start':
     import ploy.webapp
-    ploy.webapp.serve()
+    ploy.webapp.start()
 
 

@@ -13,7 +13,7 @@ Getting started
 
 Start the ploy server:
 ```
-ploy serve
+ploy start
 ```
 
 
