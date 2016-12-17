@@ -12,8 +12,14 @@ Getting started
 ---------------
 
 Start the ploy server:
-```
+```shell
 ploy start
+```
+
+Create a file named `ploy.yml` in your repository root with build instructions:
+```YAML
+- echo "Hello"
+- echo "World!"
 ```
 
 
