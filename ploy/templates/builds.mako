@@ -6,7 +6,7 @@
 <ul class="messages">
     % for build in builds:
         <li>
-            <dl>
+            <dl class="summary">
             <dt>id</dt>
                 <dd><a href="${request.resource_url(build)}">${build.id}</a></dd>
             <dt>status</dt>

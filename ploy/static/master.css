@@ -5,6 +5,6 @@ div#header li {list-style: none;}
 div#header a {text-decoration: none; margin: 10px;}
 div#header a:hover {text-decoration: underline;}
 ul.messages>li {padding: 4px; list-style: none; border: 1px solid lightgray; border-radius: 4px;}
-dt, dd {display: inline;}
-dt {margin-left: 10px; color: LightGray; font-weight:lighter;}
-dd {margin: 0;}
+dl.summary>dt, dd {display: inline;}
+dl.summary>dt {margin-left: 10px; color: LightGray; font-weight:lighter;}
+dl.summary>dd {margin: 0;}
