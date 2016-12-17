@@ -14,4 +14,4 @@ class RootTests(unittest.TestCase):
         from ploy.root import Root
         root = Root()
         self.assertEqual(root.githubEvents, root['github-events'])
-        self.assertEqual(root.jobs, root['jobs'])
+        self.assertEqual(root.builds, root['builds'])

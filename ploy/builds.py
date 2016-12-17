@@ -12,3 +12,8 @@ class Builds(Persistent):
 
     def __iter__(self):
         return self._inner.__iter__()
+
+    def __getitem__(self, item):
+        for build in self._inner:
+            if build.id == item:
+                return build

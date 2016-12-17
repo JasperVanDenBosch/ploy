@@ -2,7 +2,7 @@ from pyramid.view import view_config
 from ploy.root import Root
 from ploy.githubevents import GithubEvents
 from ploy.builds import Builds
-from ploy.build import Build
+from ploy.build import createBuild, Build
 
 
 @view_config(context=Root, renderer='templates/root.mako')
@@ -23,10 +23,8 @@ def post_github_events(request):
     ts = request.dependencies.getClock().now()
     message = {'event':event, 'payload': request.json_body, 'received':ts}
     request.context.append(message)
-    newBuild = Build()
-    newBuild.status = 'queued'
-    newBuild.queued = ts
-    newBuild.repositoryGitUrl = message['payload']['repository']['git_url']
+    newBuild = createBuild(request.dependencies, message)
+    newBuild.__parent__ = request.root.builds
     request.root.builds.append(newBuild)
     request.response.body = 'Received by Ploy.'
     return request.response
@@ -36,3 +34,8 @@ def post_github_events(request):
              renderer='templates/builds.mako')
 def get_builds(request):
     return {'builds': request.context}
+
+@view_config(context=Build, request_method='GET',
+             renderer='templates/build.mako')
+def get_build(request):
+    return {'build': request.context}
