@@ -14,7 +14,6 @@ reqs = [
 'ZODB3',
 'waitress',
 'gitpython',
-'petname'
 ]
 
 setup(name='ploy',

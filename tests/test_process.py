@@ -13,11 +13,7 @@ class ProcessTests(unittest.TestCase):
         from ploy.process import processBuild
         build = Mock()
         build.repositoryGitUrl = 'abc'
-        # make dir
-        #repository->git_url
-        #after = id of push commit
+        build.id = 'abc123'
         with patch('ploy.process.git') as git:
-            with patch('ploy.process.petname') as petname:
-                petname.Generate.return_value = 'pet'
-                processBuild(build)
-                git.Repo.clone_from.assert_called_with('abc', '/tmp/pet')
+            processBuild(build)
+            git.Repo.clone_from.assert_called_with('abc', '/tmp/abc123')
