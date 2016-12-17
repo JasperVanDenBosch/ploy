@@ -14,6 +14,7 @@ reqs = [
 'ZODB3',
 'waitress',
 'gitpython',
+'PyYAML'
 ]
 
 setup(name='ploy',

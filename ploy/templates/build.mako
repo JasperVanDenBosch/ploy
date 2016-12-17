@@ -10,4 +10,10 @@
     <dd>${build.status}</dd>
 <dt>queued</dt>
     <dd class="datetime">${build.created}</dd>
+    <dt>steps</dt>
+    <dd><ol>
+% for step in build.steps:
+        <li>${step}</li>
+% endfor
+    </ol></dd>
 </dl>

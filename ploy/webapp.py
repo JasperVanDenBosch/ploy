@@ -13,15 +13,16 @@ def worker(app=None):
     while True:
         print('Worker alive.')
         (root, closer) = get_root(app)
+        dependencies = Dependencies()
         import transaction
         noBuildsHandledYet = True
         for build in root.builds:
-            if build.status == 'queued' and noBuildsHandledYet:
+            if build.status == 'created' and noBuildsHandledYet:
                 build.status = 'cloning..'
                 transaction.get().commit()
                 noBuildsHandledYet = False
                 print('Handling build.')
-                processBuild(build)
+                processBuild(build, dependencies)
                 build.status = 'done.'
         closer()
         transaction.get().commit()

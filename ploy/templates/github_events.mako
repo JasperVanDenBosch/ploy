@@ -6,7 +6,7 @@
 <ul class="messages">
     % for event in events:
         <li>
-            <dl>
+            <dl class="summary">
             <dt>event</dt>
                 <dd>${event['event']}</dd>
             <dt>to</dt>

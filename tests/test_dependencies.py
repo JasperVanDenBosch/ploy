@@ -14,3 +14,10 @@ class DependenciesTests(unittest.TestCase):
         clock = dependencies.getClock()
         from datetime import datetime
         self.assertEqual(datetime, clock)
+
+    def test_getFilesystem(self):
+        from ploy.filesystem import Filesystem
+        from ploy.dependencies import Dependencies
+        dependencies = Dependencies()
+        filesys = dependencies.getFilesystem()
+        self.assertIsInstance(filesys, Filesystem)
